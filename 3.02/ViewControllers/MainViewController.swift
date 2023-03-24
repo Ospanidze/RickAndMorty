@@ -16,8 +16,8 @@ final class MainViewController: UIViewController {
         
         label.text = """
         if you wonder,
-        how many characters in Ricky and Morty
-        CLICK below
+        how many characters in The Rick and Morty
+        click below
         """
     }
 }
