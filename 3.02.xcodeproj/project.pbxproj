@@ -17,6 +17,8 @@
 		EF29494D29C8AB0D000400E7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF29494C29C8AB0D000400E7 /* NetworkManager.swift */; };
 		EF3B74F629CC8D8E002B0E9A /* Persone.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3B74F529CC8D8E002B0E9A /* Persone.swift */; };
 		EF51C2B829CD92AE0026B6BA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51C2B729CD92AE0026B6BA /* MainViewController.swift */; };
+		EF51C2BA29CDC2430026B6BA /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51C2B929CDC2430026B6BA /* TestViewController.swift */; };
+		EF51C2BC29CDC3560026B6BA /* testActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51C2BB29CDC3560026B6BA /* testActionCell.swift */; };
 		EFC8FD2229CC9BAC00E82DC5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC8FD2129CC9BAC00E82DC5 /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +35,8 @@
 		EF29494C29C8AB0D000400E7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		EF3B74F529CC8D8E002B0E9A /* Persone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persone.swift; sourceTree = "<group>"; };
 		EF51C2B729CD92AE0026B6BA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		EF51C2B929CDC2430026B6BA /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		EF51C2BB29CDC3560026B6BA /* testActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testActionCell.swift; sourceTree = "<group>"; };
 		EFC8FD2129CC9BAC00E82DC5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +96,7 @@
 				EF51C2B729CD92AE0026B6BA /* MainViewController.swift */,
 				EF29493029C83702000400E7 /* HeroListViewController.swift */,
 				EFC8FD2129CC9BAC00E82DC5 /* InfoViewController.swift */,
+				EF51C2B929CDC2430026B6BA /* TestViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				EF29494529C8896E000400E7 /* UserActionCell.swift */,
+				EF51C2BB29CDC3560026B6BA /* testActionCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -216,6 +222,8 @@
 				EF29492D29C83702000400E7 /* AppDelegate.swift in Sources */,
 				EF51C2B829CD92AE0026B6BA /* MainViewController.swift in Sources */,
 				EF3B74F629CC8D8E002B0E9A /* Persone.swift in Sources */,
+				EF51C2BC29CDC3560026B6BA /* testActionCell.swift in Sources */,
+				EF51C2BA29CDC2430026B6BA /* TestViewController.swift in Sources */,
 				EF29492F29C83702000400E7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
