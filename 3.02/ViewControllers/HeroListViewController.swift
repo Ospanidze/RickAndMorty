@@ -30,11 +30,9 @@ final class HeroListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 80
-        //tableView.backgroundColor = .orange
         
         setupNavigationBar()
         setupSearchController()
-        //fetchData(from: RickAndMortyAPI.baseURL.url)
         fetch()
     }
     
@@ -53,33 +51,15 @@ final class HeroListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = cell as? TableViewCell else {
+            return UITableViewCell()
+        }
         let hero = heroes[indexPath.row]
-        var content = cell.defaultContentConfiguration()
-        content.text = hero.name
-        content.secondaryText = hero.gender.rawValue
-        
-        AF.request(hero.image)
-            .validate()
-            .responseData { dataResponse in
-                switch dataResponse.result {
-                case .success(let imageData):
-                    content.image = UIImage(data: imageData)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        
-        
-        content.imageProperties.cornerRadius = tableView.rowHeight / 2
-        cell.contentConfiguration = content
+        cell.configure(with: hero)
         return cell
-
     }
-    
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        80
-//    }
     
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
@@ -108,7 +88,7 @@ final class HeroListViewController: UITableViewController {
     }
     
     private func fetch() {
-        networkManager.fetchPersona(from: Link.personeURL.url) {[weak self] result in
+        networkManager.fetchPersona(from: Link.personeURL.url) { [weak self] result in
             switch result {
             case .success(let heroes):
                 self?.heroes = heroes
@@ -118,10 +98,6 @@ final class HeroListViewController: UITableViewController {
                 print(error)
             }
         }
-    }
-    
-    private func fecthData() {
-        
     }
     
 }

@@ -28,6 +28,13 @@ struct Hero: Decodable {
     let image: String
     let created: String
     
+    var description: String {
+        """
+        Name: \(name)
+        Status: \(status.rawValue)
+        """
+    }
+    
     var fullInfo: String {
         """
         Status: \(status.rawValue)
@@ -43,7 +50,7 @@ struct Hero: Decodable {
     status = Status(rawValue: heroData["status"] as? String ?? "") ?? .unknown
     species = Species(rawValue: heroData["species"] as? String ?? "") ?? .human
     gender = Gender(rawValue: heroData["gender"] as? String ?? "") ?? .unknown
-        location = Location(heroLaction: heroData["location"] as? [String: Any] ?? [:])
+    location = Location.getLocation(value: heroData["location"] ?? "")
     image = heroData["image"] as? String ?? ""
     created = heroData["created"] as? String ?? ""
     }
@@ -52,8 +59,19 @@ struct Hero: Decodable {
 struct Location: Decodable {
     let name: String
     
-    init(heroLaction: [String: Any]) {
-        name = heroLaction["name"] as? String ?? ""
+    init(name: String) {
+        self.name = name
+    }
+    
+    init(heroLocation: [String: Any]) {
+        name = heroLocation["name"] as? String ?? ""
+    }
+    
+    static func getLocation(value: Any) -> Location {
+        guard let heroLaction = value as? [String: Any] else {
+            return Location(name: "")
+        }
+        return Location(heroLocation: heroLaction)
     }
 }
 

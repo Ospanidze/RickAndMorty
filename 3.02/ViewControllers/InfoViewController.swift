@@ -25,16 +25,13 @@ final class InfoViewController: UIViewController {
     }
     
     private func fetchImage() {
-        
-        AF.request(hero?.image ?? "")
-            .validate()
-            .responseData { [weak self] dataResponse in
-                switch dataResponse.result {
-                case .success(let imageData):
-                    self?.heroImageView.image = UIImage(data: imageData)
-                case .failure(let error):
-                    print(error)
-                }
+        networkManager.fetchImage(from: hero?.image ?? "") { [weak self] result in
+            switch result {
+            case .success(let imageData):
+                self?.heroImageView.image = UIImage(data: imageData)
+            case .failure(let error):
+                print(error)
             }
+        }
     }
 }

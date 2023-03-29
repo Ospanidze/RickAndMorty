@@ -17,6 +17,7 @@
 		EF3B74F629CC8D8E002B0E9A /* Persona.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3B74F529CC8D8E002B0E9A /* Persona.swift */; };
 		EFC8FD2229CC9BAC00E82DC5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC8FD2129CC9BAC00E82DC5 /* InfoViewController.swift */; };
 		EFF2F02E29D31CD2007FE114 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EFF2F02D29D31CD2007FE114 /* Alamofire */; };
+		EFF2F05E29D47DCB007FE114 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2F05D29D47DCB007FE114 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		EF29494C29C8AB0D000400E7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		EF3B74F529CC8D8E002B0E9A /* Persona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persona.swift; sourceTree = "<group>"; };
 		EFC8FD2129CC9BAC00E82DC5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		EFF2F05D29D47DCB007FE114 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 		EF29494429C883F3000400E7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EFF2F05F29D47E9B007FE114 /* Cell */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -132,6 +135,14 @@
 				EF29494C29C8AB0D000400E7 /* NetworkManager.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		EFF2F05F29D47E9B007FE114 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				EFF2F05D29D47DCB007FE114 /* TableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +225,7 @@
 				EF29493129C83702000400E7 /* HeroListViewController.swift in Sources */,
 				EF29494D29C8AB0D000400E7 /* NetworkManager.swift in Sources */,
 				EFC8FD2229CC9BAC00E82DC5 /* InfoViewController.swift in Sources */,
+				EFF2F05E29D47DCB007FE114 /* TableViewCell.swift in Sources */,
 				EF29492D29C83702000400E7 /* AppDelegate.swift in Sources */,
 				EF3B74F629CC8D8E002B0E9A /* Persona.swift in Sources */,
 				EF29492F29C83702000400E7 /* SceneDelegate.swift in Sources */,
