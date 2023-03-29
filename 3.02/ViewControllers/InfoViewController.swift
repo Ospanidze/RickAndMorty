@@ -12,7 +12,11 @@ final class InfoViewController: UIViewController {
     
     //MARK: IBOutlets
     
-    @IBOutlet var heroImageView: UIImageView!
+    @IBOutlet var heroImageView: UIImageView! {
+        didSet {
+            heroImageView.layer.cornerRadius = heroImageView.frame.width / 2
+        }
+    }
     @IBOutlet var descriptionLabel: UILabel!
     
     var hero: Hero?
