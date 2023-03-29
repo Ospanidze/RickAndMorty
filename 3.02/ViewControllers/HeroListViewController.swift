@@ -6,10 +6,22 @@
 //
 
 import UIKit
+import Alamofire
 
-final class HeroListViewController: UICollectionViewController {
+final class HeroListViewController: UITableViewController {
     
     private let networkManager = NetworkManager.shared
+    
+    private let searchController = UISearchController(searchResultsController: nil)
+    
+//    private var filteredCharacter: [Character] = []
+//    private var searchBarIsEmpty: Bool {
+//        guard let text = searchController.searchBar.text else { return false }
+//        return text.isEmpty
+//    }
+//    private var isFiltering: Bool {
+//        return searchController.isActive && !searchBarIsEmpty
+//    }
     
     private var heroes: [Hero] = []
     
@@ -17,65 +29,118 @@ final class HeroListViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchHero()
+        tableView.rowHeight = 80
+        //tableView.backgroundColor = .orange
+        
+        setupNavigationBar()
+        setupSearchController()
+        //fetchData(from: RickAndMortyAPI.baseURL.url)
+        fetch()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let infoVC = segue.destination as? InfoViewController 
-        infoVC?.hero = sender as? Hero
+        guard let infoVC = segue.destination as? InfoViewController else { return
+        }
+        guard let indexPath = tableView.indexPathForSelectedRow else {
+            return
+        }
+        let hero = heroes[indexPath.row]
+        infoVC.hero = hero
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         heroes.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "userAction", for: indexPath)
-        guard let cell = cell as? UserActionCell else {
-            return UICollectionViewCell()
-        }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let hero = heroes[indexPath.row]
+        var content = cell.defaultContentConfiguration()
+        content.text = hero.name
+        content.secondaryText = hero.gender.rawValue
         
-        let persone = heroes[indexPath.item]
-        cell.configure(model: persone)
+        AF.request(hero.image)
+            .validate()
+            .responseData { dataResponse in
+                switch dataResponse.result {
+                case .success(let imageData):
+                    content.image = UIImage(data: imageData)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        
+        
+        content.imageProperties.cornerRadius = tableView.rowHeight / 2
+        cell.contentConfiguration = content
         return cell
+
     }
     
-}
-
-//MARK: UICollectionViewDelegateFlowLayout
-
-extension HeroListViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        80
+//    }
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.barTintColor = .white
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
         
-        CGSize(width: UIScreen.main.bounds.width - 48, height: 100)
+        if let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            textField.font = UIFont.boldSystemFont(ofSize: 17)
+            textField.textColor = .white
+        }
     }
-}
+    
+    private func setupNavigationBar() {
+        title = "Rick and Morty"
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.backgroundColor = .black
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 
-//MARK: UICollectionViewDelegate
-
-extension HeroListViewController {
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let hero = heroes[indexPath.item]
-        performSegue(withIdentifier: "showInfo", sender: hero)
+        navigationController?.navigationBar.standardAppearance = navBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
     }
-}
-
-//MARK: NetworkManager
-
-extension HeroListViewController {
-    private func fetchHero() {
-        networkManager.fetchPersone(from: Link.personeURL.url) { [weak self] result in
+    
+    private func fetch() {
+        networkManager.fetchPersona(from: Link.personeURL.url) {[weak self] result in
             switch result {
-            case .success(let persone):
-                self?.heroes = persone.results
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
-                }
+            case .success(let heroes):
+                self?.heroes = heroes
+                //print(heroes.count)
+                self?.tableView.reloadData()
             case .failure(let error):
                 print(error)
             }
         }
     }
+    
+    private func fecthData() {
+        
+    }
+    
 }
+
+// MARK: - UISearchResultsUpdating
+extension HeroListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text ?? "")
+    }
+
+    private func filterContentForSearchText(_ searchText: String) {
+//        filteredCharacter = rickAndMorty?.results.filter { character in
+//            character.name.lowercased().contains(searchText.lowercased())
+//        } ?? []
+
+        tableView.reloadData()
+    }
+}
+
+
+
+

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum Link {
     case personeURL
@@ -18,47 +19,37 @@ enum Link {
     }
 }
 
-enum NetworkError: Error {
-    case noData
-    case invalidURL
-    case decodingError
-}
-
 final class NetworkManager {
     
     static let shared = NetworkManager()
     
     private init() {}
     
-    func fetchPersone(from url: URL, completion: @escaping(Result<Persone, NetworkError>) -> Void) {
+    func fetchPersona(from url: URL, completion: @escaping(Result<[Hero], AFError>) -> Void) {
         
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data else {
-                completion(.failure(.noData))
-                print(error?.localizedDescription ?? "No error description")
-                return
+        AF.request(url)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
+                    let heroes = Persona.getHeroes(from: value)
+                    completion(.success(heroes))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
-            
-            let decoder = JSONDecoder()
-            do {
-                let heroes = try decoder.decode(Persone.self, from: data)
-                completion(.success(heroes))
-            } catch {
-                completion(.failure(.decodingError))
-            }
-        }.resume()
     }
     
-    func fetchImage(from url: URL, completion: @escaping(Result<Data, NetworkError>) -> Void) {
-        DispatchQueue.global().async {
-            guard let imageData = try? Data(contentsOf: url) else {
-                completion(.failure(.noData))
-                return
-            }
-            DispatchQueue.main.async {
-                completion(.success(imageData))
-            }
-        }
+    func fetchImage(from url: URL, completion: @escaping(Result<Data, AFError>) -> Void) {
+//        DispatchQueue.global().async {
+//            guard let imageData = try? Data(contentsOf: url) else {
+//                completion(.failure(.noData))
+//                return
+//            }
+//            DispatchQueue.main.async {
+//                completion(.success(imageData))
+//            }
+//        }
     }
 }
 
