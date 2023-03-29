@@ -15,7 +15,7 @@ final class TableViewCell: UITableViewCell {
         didSet {
             heroImageView.contentMode = .scaleAspectFit
             heroImageView.clipsToBounds = true
-            heroImageView.layer.cornerRadius = heroImageView.frame.height / 2
+            heroImageView.layer.cornerRadius = heroImageView.frame.width / 2
             heroImageView.backgroundColor = .white
         }
     }

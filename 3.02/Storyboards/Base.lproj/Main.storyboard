@@ -34,13 +34,13 @@
                                             <rect key="frame" x="20" y="16" width="62" height="62"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="62" id="AMf-tp-AQe"/>
+                                                <constraint firstAttribute="width" secondItem="Wx4-Er-acw" secondAttribute="height" multiplier="1:1" id="yCV-FV-VcL"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Lk7-xP-Psu" firstAttribute="leading" secondItem="Wx4-Er-acw" secondAttribute="trailing" constant="10" id="5iF-pC-aiC"/>
                                         <constraint firstItem="Lk7-xP-Psu" firstAttribute="top" secondItem="OXE-re-J4w" secondAttribute="topMargin" constant="5" id="Ai4-it-hYf"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Wx4-Er-acw" secondAttribute="bottom" constant="5" id="SZ6-8t-ySe"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Lk7-xP-Psu" secondAttribute="bottom" constant="5" id="X2x-FE-qLs"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Lk7-xP-Psu" secondAttribute="trailing" constant="10" id="am8-qi-FGs"/>
                                         <constraint firstItem="Wx4-Er-acw" firstAttribute="leading" secondItem="OXE-re-J4w" secondAttribute="leadingMargin" id="hlJ-e7-S17"/>
