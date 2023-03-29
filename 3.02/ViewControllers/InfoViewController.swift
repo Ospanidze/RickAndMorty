@@ -10,6 +10,8 @@ import Alamofire
 
 final class InfoViewController: UIViewController {
     
+    //MARK: IBOutlets
+    
     @IBOutlet var heroImageView: UIImageView!
     @IBOutlet var descriptionLabel: UILabel!
     

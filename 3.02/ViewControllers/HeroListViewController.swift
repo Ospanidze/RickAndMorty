@@ -10,6 +10,8 @@ import Alamofire
 
 final class HeroListViewController: UITableViewController {
     
+    //MARK: Private Properties
+    
     private let networkManager = NetworkManager.shared
     
     private let searchController = UISearchController(searchResultsController: nil)
@@ -60,6 +62,8 @@ final class HeroListViewController: UITableViewController {
         cell.configure(with: hero)
         return cell
     }
+    
+    //MARK: Private Methods
     
     private func setupSearchController() {
         searchController.searchResultsUpdater = self

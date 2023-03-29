@@ -46,13 +46,21 @@ struct Hero: Decodable {
     }
     
     init(heroData: [String: Any]) {
-    name =  heroData["name"] as? String  ?? ""
-    status = Status(rawValue: heroData["status"] as? String ?? "") ?? .unknown
-    species = Species(rawValue: heroData["species"] as? String ?? "") ?? .human
-    gender = Gender(rawValue: heroData["gender"] as? String ?? "") ?? .unknown
-    location = Location.getLocation(value: heroData["location"] ?? "")
-    image = heroData["image"] as? String ?? ""
-    created = heroData["created"] as? String ?? ""
+        name =  heroData["name"] as? String  ?? ""
+        
+        status = Status(
+            rawValue: heroData["status"] as? String ?? ""
+        ) ?? .unknown
+        species = Species(
+            rawValue: heroData["species"] as? String ?? ""
+        ) ?? .human
+        gender = Gender(
+            rawValue: heroData["gender"] as? String ?? ""
+        ) ?? .unknown
+        
+        location = Location.getLocation(value: heroData["location"] ?? "")
+        image = heroData["image"] as? String ?? ""
+        created = heroData["created"] as? String ?? ""
     }
 }
 

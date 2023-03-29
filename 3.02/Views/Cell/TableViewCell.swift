@@ -10,6 +10,7 @@ import UIKit
 final class TableViewCell: UITableViewCell {
     
     // MARK: IBOutlets
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var heroImageView: UIImageView! {
         didSet {
@@ -23,6 +24,7 @@ final class TableViewCell: UITableViewCell {
     private let networkManager = NetworkManager.shared
     
     // MARK: - Public methods
+    
     func configure(with hero: Hero?) {
         guard let hero = hero else { return }
         nameLabel.text = hero.description
